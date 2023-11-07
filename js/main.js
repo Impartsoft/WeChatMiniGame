@@ -5,6 +5,7 @@ import GameInfo from './runtime/gameinfo'
 import Music from './runtime/music'
 import DataBus from './databus'
 import login from './base/login.js'
+import gameServer  from './gameserver.js';
 
 const ctx = canvas.getContext('2d')
 const databus = new DataBus()
@@ -30,24 +31,18 @@ export default class Main {
     })
 
     login.do(() => {
-
-      this.login()
-
-      // gameServer.login().then(() => {
-      //     this.scenesInit();
-      // });
-  });
+      gameServer.login().then(() => {
+          // this.scenesInit();
+      });
+    });
     // this.createRoom()
     // this.test()
     // this.test1()
-  }
-
-  login() {
-    console.log('login test')
-    return this.server.login().then(() => {
-      console.log('createRoom test')
-      this.createRoom()
-    });
+    // console.log('login test')
+    // return this.server.login().then(() => {
+    //   console.log('createRoom test')
+    //   this.createRoom()
+    // });
 }
 
   createRoom(){
