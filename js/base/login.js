@@ -16,7 +16,6 @@ class Login {
               if ( authSetting['scope.userInfo'] === true ) {
                   wx.getUserInfo({
                       success: (res) => {
-                          debugger
 
                           databus.userInfo = res.userInfo;
                           this.userInfo = res.userInfo
@@ -51,8 +50,6 @@ class Login {
       });
 
       button.onTap((res) => {
-        debugger
-        console.log(res)
 
           if ( res.errMsg.indexOf(':ok') > -1 ) {
               button.destroy();

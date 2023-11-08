@@ -309,48 +309,53 @@ class GameServer {
     }
 
     login() {
-        return this.server.login().then(() => {
-            this.server.getLastRoomInfo().then((res) => {
-                debugger
-                console.log(res)
-                // 查询到之前的游戏还没结束
-                if ( res.data && res.data.roomInfo && res.data.roomInfo.roomState === config.roomState.gameStart ) {
-                    console.log('查询到还有没结束的游戏', res.data);
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: '查询到之前还有尚未结束的游戏，是否重连继续游戏？',
-                        success :(modalRes) => {
-                            if ( modalRes.confirm ) {
-                                this.onRoomInfoChange(res.data.roomInfo);
+      return this.server.login();
+  }
 
-                                wx.showLoading({
-                                    title: '重连中...',
-                                });
+    // login() {
+    //     return this.server.login().then(() => {
+    //         console.log('game servce login!')
+    //         this.server.getLastRoomInfo().then((res) => {
+    //             console.log(res)
+    //             debugger
+    //             // 查询到之前的游戏还没结束
+    //             if ( res.data && res.data.roomInfo && res.data.roomInfo.roomState === config.roomState.gameStart ) {
+    //                 console.log('查询到还有没结束的游戏', res.data);
+    //                 wx.showModal({
+    //                     title: '温馨提示',
+    //                     content: '查询到之前还有尚未结束的游戏，是否重连继续游戏？',
+    //                     success :(modalRes) => {
+    //                         if ( modalRes.confirm ) {
+    //                             this.onRoomInfoChange(res.data.roomInfo);
 
-                                this.server.reconnect({
-                                    accessInfo: res.data.accessInfo
-                                }).then(connectRes => {
-                                    console.log('未结束的游戏断线重连结果', connectRes);
-                                    this.reconnectMaxFrameId = connectRes.maxFrameId || 0;
-                                    this.reconnecting = true;
+    //                             wx.showLoading({
+    //                                 title: '重连中...',
+    //                             });
 
-                                    // 手动调用onGameStart模拟正常开局
-                                    this.onGameStart('人工');
-                                }).catch((e) => {
-                                    console.log(e);
-                                    wx.showToast({
-                                        title: '重连失败，请重新开房间',
-                                        icon: 'none',
-                                        duration: 2000
-                                    });
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    }
+    //                             this.server.reconnect({
+    //                                 accessInfo: res.data.accessInfo
+    //                             }).then(connectRes => {
+    //                                 console.log('未结束的游戏断线重连结果', connectRes);
+    //                                 this.reconnectMaxFrameId = connectRes.maxFrameId || 0;
+    //                                 this.reconnecting = true;
+
+    //                                 // 手动调用onGameStart模拟正常开局
+    //                                 this.onGameStart('人工');
+    //                             }).catch((e) => {
+    //                                 console.log(e);
+    //                                 wx.showToast({
+    //                                     title: '重连失败，请重新开房间',
+    //                                     icon: 'none',
+    //                                     duration: 2000
+    //                                 });
+    //                             });
+    //                         }
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //     });
+    // }
 
     createRoom(options = {}, callback) {
         this.server.createRoom({

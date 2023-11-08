@@ -26,13 +26,13 @@ export default class Main {
 
     // this.restart()
     // wx.cloud.init()
-    wx.cloud.init({
-      traceUser: true
-    })
+    // wx.cloud.init({
+    //   traceUser: true
+    // })
 
     login.do(() => {
       gameServer.login().then(() => {
-          // this.scenesInit();
+           this.scenesInit();
       });
     });
     // this.createRoom()
@@ -43,6 +43,42 @@ export default class Main {
     //   console.log('createRoom test')
     //   this.createRoom()
     // });
+}
+
+scenesInit() {
+  // 从会话点进来的场景
+  if ( databus.currAccessInfo ) {
+      this.joinToRoom();
+  } else {
+      this.runScene(Home);
+  }
+
+  gameServer.event.on('backHome', () => {
+      this.runScene(Home);
+  });
+
+  gameServer.event.on('createRoom', () => {
+      this.runScene(Room);
+  });
+
+  gameServer.event.on('onGameStart', () => {
+      databus.gameInstance = this.runScene(Battle);
+  });
+
+  gameServer.event.on('onGameEnd', () => {
+     gameServer.gameResult.forEach((member) => {
+          var isSelf = member.nickname === databus.userInfo.nickName;
+          isSelf && wx.showModal({
+              content: member.win ? "你已获得胜利" : "你输了",
+              confirmText: "返回首页",
+              confirmColor: "#02BB00",
+              showCancel: false,
+              success: () => {
+                 gameServer.clear();
+              }
+          });
+      });
+  });
 }
 
   createRoom(){
