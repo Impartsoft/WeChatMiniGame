@@ -1,7 +1,6 @@
 import Sprite from './sprite'
-import DataBus from '../databus'
-
-const databus = new DataBus()
+import dataBus from '../databus'
+ 
 
 const __ = {
   timer: Symbol('timer'),

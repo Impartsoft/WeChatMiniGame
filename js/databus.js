@@ -1,16 +1,10 @@
 import Pool from './base/pool'
 
-let instance
-
 /**
  * 全局状态管理器
  */
-export default class DataBus {
+class DataBus {
   constructor() {
-    if (instance) return instance
-
-    instance = this
-
     this.pool = new Pool()
     this.userInfo = {};
     this.reset()
@@ -70,3 +64,5 @@ export default class DataBus {
     this.pool.recover('bullet', bullet)
   }
 }
+
+export default new DataBus();

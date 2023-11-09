@@ -1,5 +1,5 @@
 import Animation from '../base/animation'
-import DataBus from '../databus'
+import dataBus from '../databus'
 
 const ENEMY_IMG_SRC = 'images/enemy.png'
 const ENEMY_WIDTH = 60
@@ -8,8 +8,6 @@ const ENEMY_HEIGHT = 60
 const __ = {
   speed: Symbol('speed')
 }
-
-const databus = new DataBus()
 
 function rnd(start, end) {
   return Math.floor(Math.random() * (end - start) + start)

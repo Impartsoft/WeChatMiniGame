@@ -1,6 +1,6 @@
 import Sprite from '../base/sprite'
 import Bullet from './bullet'
-import DataBus from '../databus'
+import dataBus from '../databus'
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
@@ -9,8 +9,6 @@ const screenHeight = window.innerHeight
 const PLAYER_IMG_SRC = 'images/hero.png'
 const PLAYER_WIDTH = 80
 const PLAYER_HEIGHT = 80
-
-const databus = new DataBus()
 
 export default class Player extends Sprite {
   constructor() {
