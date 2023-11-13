@@ -1,5 +1,5 @@
 import Sprite from './sprite'
-import dataBus from '../databus'
+import databus from '../databus'
  
 
 const __ = {

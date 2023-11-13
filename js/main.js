@@ -1,14 +1,11 @@
 import Player from './player/index'
 import Battle from './scenes/battle'
-import Enemy from './npc/enemy'
-import BackGround from './runtime/background'
-import GameInfo from './runtime/gameinfo'
-import Music from './runtime/music'
-import dataBus from './databus'
+
+import databus from './databus'
 import login from './base/login.js'
 import gameServer  from './gameserver.js';
 
-const ctx = canvas.getContext('2d')
+
 
 
 /**

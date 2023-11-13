@@ -1,6 +1,6 @@
 import Sprite from '../base/sprite'
 import Bullet from './bullet'
-import dataBus from '../databus'
+import databus from '../databus'
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
